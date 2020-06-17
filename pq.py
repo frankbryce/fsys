@@ -21,12 +21,13 @@ def AddAxiom(a):
     else:
         raise Exception("this is not an axiom")
 
+R = [
+    (r"(-+)p(-+)q(-+)", r"\1p\2-q\3-"),
+]
 
-def _rule1(t):
-    h1, h2, h3 = _extractHGroups(t)
-    newT = '-'*len(h1) + 'p' + '-'*(len(h2)+1) + 'q' + '-'*(len(h3)+1)
+def AddTheorem(r, t):
+    newT = re.sub(r[0], r[1], t)
     if newT not in T:
         T.append(newT)
 
-R = [_rule1]
 T = A + []
