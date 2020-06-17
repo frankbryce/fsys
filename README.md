@@ -3,7 +3,7 @@ Simple tool to help me understand formal systems intuitively
 
 # Example Usage
 
-'''bash
+```bash
 python
 Python 3.7.3 (default, Dec 20 2019, 18:57:59) 
 [GCC 8.3.0] on linux
@@ -33,4 +33,4 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> NaiveAddTheorems(R, T, AddTheorem)
 >>> len(T[-1])-1
 25
-'''
+```
