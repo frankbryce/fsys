@@ -1,4 +1,4 @@
-# fsys
+# fsym
 Simple tool to help me understand formal systems intuitively
 
 # Example Usage
