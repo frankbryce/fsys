@@ -11,16 +11,21 @@ def AddAxiom(a):
     else:
         raise Exception("this is not an axiom")
 
-def AddTheorem(r, t):
-    assert t in T
+def AddTheorem(r, *ts):
+    for t in ts:
+        assert t in T
     assert r in R
     r = r.split(">>")
-    ms = re.match(r[0], t)
-    if not ms:
+    rs = r[0].split(',')
+    if len(rs) != len(ts):
         return
     newT = r[-1]
-    for name, m in ms.groupdict().items():
-        newT = re.sub(r'\?<{}>'.format(name), m, newT)
+    for i, rl in enumerate(rs):
+        ms = re.match(r'^{}$'.format(rl), ts[i])
+        if not ms:
+            return
+        for name, m in ms.groupdict().items():
+            newT = re.sub(r'\?<{}>'.format(name), m, newT)
     VerifyTheorem(newT)
     T.add(newT)
 
@@ -35,7 +40,8 @@ def VerifyTheorem(t):
     assert ')' not in t
     # required for encoding non-capturing group
     assert ':' not in t
-    # required forformula
+    # required for multi-theorem rules
+    assert ',' not in t
 
 
 A = set(['N-'])
