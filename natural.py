@@ -14,6 +14,7 @@ def AddAxiom(a):
 def AddTheorem(r, t):
     assert t in T
     assert r in R
+    r = r.split(">>")
     ms = re.match(r[0], t)
     if not ms:
         return
@@ -34,6 +35,7 @@ def VerifyTheorem(t):
     assert ')' not in t
     # required for encoding non-capturing group
     assert ':' not in t
+    # required forformula
 
 
 A = set(['N-'])
@@ -42,9 +44,9 @@ T = A | set([
 for t in T:
     VerifyTheorem(T)
 R = set([
-    (r"N(?P<x>-+)", r"N?<x>-"),
-    (r"N(?P<x>-+)", r"?<x>A?<x>A?<x>"),
-    (r"(?P<x>-+)A(?P<y>-+)A-(?P<z>-+)", r"?<x>?<y>A?<y>A?<z>"),
-    (r"(?P<x>-+)A-+A-", r"S?<x>"),
+    r"N(?P<x>-+)>>N?<x>-",
+    r"N(?P<x>-+)>>?<x>A?<x>A?<x>",
+    r"(?P<x>-+)A(?P<y>-+)A-(?P<z>-+)>>?<x>?<y>A?<y>A?<z>",
+    r"(?P<x>-+)A-+A->>S?<x>",
 ])
 
